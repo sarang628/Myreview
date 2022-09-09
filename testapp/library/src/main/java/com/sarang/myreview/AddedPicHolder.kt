@@ -3,8 +3,8 @@ package com.sarang.myreview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.sryang.torang_core.data.model.ReviewImage
 import com.sarang.myreview.databinding.ItemAddedPictureBinding
+import com.sryang.torang_core.data.entity.ReviewImage
 
 class AddedPicHolder(var itemAddPictureBinding: ItemAddedPictureBinding) : RecyclerView.ViewHolder(
     itemAddPictureBinding.root

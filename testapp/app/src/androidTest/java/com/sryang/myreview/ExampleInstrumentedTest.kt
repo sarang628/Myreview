@@ -2,7 +2,7 @@ package com.sryang.myreview
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.sryang.torang_core.data.model.LoggedInUserData
+import com.sryang.torang_core.data.entity.LoggedInUserData
 import com.example.torangrepository.FeedRepositoryImpl
 import com.example.torangrepository.LoginRepositoryImpl
 import kotlinx.coroutines.runBlocking

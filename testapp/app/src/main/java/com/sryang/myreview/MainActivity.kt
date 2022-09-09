@@ -10,6 +10,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        MyReviewActivity.go(this, 1, 541)
+        //MyReviewActivity.go(this, 1, 541)
     }
 }

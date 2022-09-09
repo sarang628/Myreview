@@ -1,11 +1,13 @@
 package com.sarang.myreview
 
 import androidx.lifecycle.*
-import com.sryang.torang_core.data.model.*
-import com.sryang.torang_core.repository.MyReviewRepository
+import com.sryang.torang_core.data.entity.*
 import com.sarang.myreview.databinding.FragmentAddReviewBinding
 import com.sryang.torang_core.data.entity.*
 import com.sryang.torang_core.util.Event
+import com.sryang.torang_repository.data.entity.FeedEntity
+import com.sryang.torang_repository.data.entity.RestaurantEntity
+import com.sryang.torang_repository.repository.MyReviewRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -47,12 +49,12 @@ class MyReviewViewModel @Inject constructor(private val repository: MyReviewRepo
     val rating = MutableLiveData<Float>()
 
     /** 업로드 할 식당 정보 */
-    private val _selectedRestaurant = MutableLiveData<Restaurant>()
-    val selectedRestaurant: LiveData<Restaurant> = _selectedRestaurant
+    private val _selectedRestaurant = MutableLiveData<RestaurantEntity>()
+    val selectedRestaurant: LiveData<RestaurantEntity> = _selectedRestaurant
 
     /** 업로드 된 리뷰를 불러올 때 사용 */
     @SuppressWarnings("todo delete")
-    var myReview: LiveData<ReviewAndImage?> = reviewId.switchMap {
+    var myReview: LiveData<FeedEntity?> = reviewId.switchMap {
         repository.getMyReview(it)
     }
 

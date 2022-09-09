@@ -45,6 +45,7 @@ dependencies {
     implementation 'com.github.sarang628:TorangRepository:5aed244008'
     implementation 'com.github.sarang628:TorangCore:080136d125'
     implementation 'com.github.sarang628:TorangImageLoader:f4a2359698'
+    implementation 'com.github.sarang628:InstagramGallery:c5a0381c9e'
 
 //    implementation project(path: ':screen_selectpicture')
 //    implementation project(path: ':InstagramGalleryModule')

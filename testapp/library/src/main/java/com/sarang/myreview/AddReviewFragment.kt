@@ -87,7 +87,7 @@ class MyReviewFragment : Fragment() {
     }
 
     private fun subscribeUi(binding: FragmentAddReviewBinding) {
-        mViewModel.myReview?.observe(viewLifecycleOwner, {
+        /*mViewModel.myReview?.observe(viewLifecycleOwner, {
             it?.let {
                 binding.review = it
                 it.review?.let {
@@ -98,7 +98,7 @@ class MyReviewFragment : Fragment() {
                 }
                 mViewModel.uploadedPictures.postValue(ArrayList(it.images))
             }
-        })
+        })*/
 
         mViewModel.selectedImagePath.observe(viewLifecycleOwner, {
             (binding.rvMyReivew.adapter as AddPicRvadt).setImages(it)

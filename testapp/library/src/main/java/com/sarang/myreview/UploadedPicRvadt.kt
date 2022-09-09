@@ -2,7 +2,7 @@ package com.sarang.myreview
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.sryang.torang_core.data.model.ReviewImage
+import com.sryang.torang_core.data.entity.ReviewImage
 import java.util.*
 
 class UploadedPicRvadt(private val viewmodel: MyReviewViewModel) : RecyclerView.Adapter<AddedPicHolder>() {
