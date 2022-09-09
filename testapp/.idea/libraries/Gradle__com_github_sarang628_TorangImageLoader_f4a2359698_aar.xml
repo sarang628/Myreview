@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.sarang628:TorangImageLoader:f4a2359698@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c4af561e1380d7f00d03c752636e3453/transformed/jetified-TorangImageLoader-f4a2359698/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c4af561e1380d7f00d03c752636e3453/transformed/jetified-TorangImageLoader-f4a2359698/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c4af561e1380d7f00d03c752636e3453/transformed/jetified-TorangImageLoader-f4a2359698/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.sarang628/TorangImageLoader/f4a2359698/58ad0ecede82373b382e578b6c1a401afdc62a2d/TorangImageLoader-f4a2359698-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -9,7 +9,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.sryang.myreviewtestapp"
+        applicationId "com.sryang.myreview"
         minSdk 23
         targetSdk 31
         versionCode 1
@@ -32,7 +32,7 @@ android {
         jvmTarget = '1.8'
     }
 
-    buildFeatures{
+    buildFeatures {
         dataBinding true
         viewBinding true
     }
@@ -40,16 +40,15 @@ android {
 
 dependencies {
 
-    implementation project(path: ':TorangRepository')
-    implementation project(path: ':torang_core')
-    implementation project(path: ':screen_myreview')
-    implementation project(path: ':MediaContentProvider')
-    implementation project(path: ':torangimageloader')
-    implementation project(path: ':InstagramGalleryModule')
+    implementation 'com.github.sarang628:TorangRepository:5aed244008'
+    implementation 'com.github.sarang628:TorangCore:080136d125'
+    implementation project(path: ':library')
+//    implementation project(path: ':MediaContentProvider')
+    implementation 'com.github.sarang628:TorangImageLoader:f4a2359698'
+//    implementation project(path: ':InstagramGalleryModule')
 
     /** HILT */
     implementation "com.google.dagger:hilt-android:$hiltVersion"
-    androidTestImplementation project(path: ':TorangRepository')
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltViewModelVersion"
     kapt "androidx.hilt:hilt-compiler:$hiltViewModelVersion"
@@ -71,9 +70,12 @@ dependencies {
     /** NAVIGATION COMPONENT */
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion" // Kotlin
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion" // Kotlin
-    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigationVersion" // Feature module Support
-    androidTestImplementation "androidx.navigation:navigation-testing:$navigationVersion" // Testing Navigation
-    implementation "androidx.navigation:navigation-compose:$navigationVersion" // Jetpack Compose Integration
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigationVersion"
+    // Feature module Support
+    androidTestImplementation "androidx.navigation:navigation-testing:$navigationVersion"
+    // Testing Navigation
+    implementation "androidx.navigation:navigation-compose:$navigationVersion"
+    // Jetpack Compose Integration
 
     /** HILT */
     implementation "com.google.dagger:hilt-android:$hiltVersion"

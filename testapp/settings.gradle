@@ -1,34 +1,3 @@
 rootProject.name = "MyReviewTestApp"
 include ':app'
-include ':torang_core'
-project(':torang_core').projectDir = new File('../../TorangCore/torang_core')
-include ':torangimageloader'
-project(':torangimageloader').projectDir = new File('../../TorangImageLoader/torangimageloader')
-include ':TorangRepository'
-project(':TorangRepository').projectDir = new File('../../TorangRepository')
-include ':InstagramGalleryModule'
-project(':InstagramGalleryModule').projectDir = new File('../../InstagramGallery/InstagramGalleryModule')
-include ':MediaContentProvider'
-project(':MediaContentProvider').projectDir = new File("../../MediaContentResolver/MediaContentResolverLibrary")
-
-include ':login'
-project(':login').projectDir = new File('../../TorangScreenLogin/login')
-
-include ':torangdialog'
-project(':torangdialog').projectDir = new File('../../TorangDialog/torangdialog')
-
-include ':screen_pictures'
-project(':screen_pictures').projectDir = new File('../../TorangScreenPicture/screen_pictures')
-
-include ':image_compress'
-project(':image_compress').projectDir = new File('../../TorangImageCompress/image_compress')
-
-include ':screen_myreview'
-project(':screen_myreview').projectDir = new File('../../TorangScreenMyreview/screen_myreview')
-
-include ':screen_selectpicture'
-project(':screen_selectpicture').projectDir = new File('../../TorangScreenSelectPicture/screen_selectpicture')
-
-include ':screenprogressdialog'
-project(':screenprogressdialog').projectDir = new File('../../TorangProgressDialog/screenprogressdialog')
-
+include ':library'

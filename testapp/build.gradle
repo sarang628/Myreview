@@ -3,7 +3,7 @@ ext {
     compileSdkVersion = 31
     minSdkVersion = 23
     targetSdkVersion = 30
-    buildToolsVersion = '30.0.2'
+    buildToolsVersion = '30.0.3'
 
     // App dependencies
     workVersion = '2.1.0'
@@ -49,15 +49,15 @@ ext {
 
 buildscript {
     ext.kotlinVersion = '1.5.10'
-    ext.navigationVersion = '2.4.0-beta02'
+    ext.navigationVersion = '2.4.1'
     ext.ktlintVersion = '0.33.0'
-    ext.hiltVersion = '2.37'
+    ext.hiltVersion = '2.40.1'
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath 'com.android.tools.build:gradle:7.2.2'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31'
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
@@ -72,6 +72,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
         //maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
     }
