@@ -43,45 +43,45 @@ class MyReviewFragment : Fragment() {
         val binding = FragmentAddReviewBinding.inflate(layoutInflater, container, false)
             .apply {
                 // 뷰모델 설정
-                viewModel = mViewModel
+                //viewModel = mViewModel
                 // 공유 뷰모델 설정
                 //mapSharedViewModel = mapSharedViewModel
                 // lifecyclerowner 설정
-                lifecycleOwner = viewLifecycleOwner
+//                lifecycleOwner = viewLifecycleOwner
 
                 // 업로드된 이미지 불러오는 아답터 설정
-                rvUploadedPictures.adapter = UploadedPicRvadt(mViewModel)
+//                rvUploadedPictures.adapter = UploadedPicRvadt(mViewModel)
 
                 // 업로드 할 이미지 불러오는 아답터 설정
-                rvMyReivew.adapter = AddPicRvadt(mViewModel)
+//                rvMyReivew.adapter = AddPicRvadt(mViewModel)
 
                 // 사진 업로드 모듈 contract 초기화
-                val getContent = registerForActivityResult(InstagramGalleryContract()) {
-                    it?.getStringArrayListExtra("pictures")?.also {
-                        Logger.d(it.toString())
-                        mViewModel.setSelectedImagePath(it)
-                    }
-                }
+//                val getContent = registerForActivityResult(InstagramGalleryContract()) {
+//                    it?.getStringArrayListExtra("pictures")?.also {
+//                        Logger.d(it.toString())
+//                        mViewModel.setSelectedImagePath(it)
+//                    }
+//                }
 
                 // 사진 업로드 모듈 호출
-                button2.setOnClickListener {
-                    getContent.launch("a")
-                }
+//                button2.setOnClickListener {
+//                    getContent.launch("a")
+//                }
             }
 
 
         // 리뷰 불러오기
-        getReviewId()?.let {
-            mViewModel.loadReview(it)
-        }
+//        getReviewId()?.let {
+//            mViewModel.loadReview(it)
+//        }
 
         // 식당 불러오기
-        getRestaurantId()?.let {
-            mViewModel.selectRestaurant(it)
-        }
+//        getRestaurantId()?.let {
+//            mViewModel.selectRestaurant(it)
+//        }
 
         // UI 구독
-        subscribeUi(binding)
+//        subscribeUi(binding)
 
         return binding.root
     }

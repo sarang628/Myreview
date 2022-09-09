@@ -14,7 +14,9 @@
             <stringArg name="classpath">
               <args>
                 <arg>$MODULE_DIR$/../../../app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar</arg>
+                <arg>$MODULE_DIR$/../../../library/build/intermediates/compile_library_classes_jar/debug/classes.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/fa99dbb3ee6ec333e4e2e6d74de815d8/transformed/jetified-TorangCore-080136d125-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/378d97a3104d5461bb7e86a99db69889/transformed/jetified-InstagramGallery-c5a0381c9e-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/f79980c46d34defc54d6f43e585034e2/transformed/jetified-TorangImageLoader-f4a2359698-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/9a8b92e52cb1135ab2dc8b82d3b8987f/transformed/databinding-runtime-7.2.2-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/b54409bc6f7f30d4a0d4b3f1ff0e40f4/transformed/jetified-viewbinding-7.2.2-api.jar</arg>
@@ -229,6 +231,7 @@
     <orderEntry type="library" name="Gradle: androidx.room:room-runtime:2.3.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.sqlite:sqlite-framework:2.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.sqlite:sqlite:2.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.sarang628:InstagramGallery:c5a0381c9e@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.sarang628:TorangImageLoader:f4a2359698@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.dagger:hilt-android:2.38.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.dagger:dagger-lint-aar:2.38.1@aar" level="project" />

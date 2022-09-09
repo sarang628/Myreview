@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ebb06ae8091a903d32f8e1c2f55a4d50/transformed/jetified-hilt-lifecycle-viewmodel-1.0.0-alpha01/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/11fd39c25d9662ba0a12dbe375bac7e7/transformed/jetified-hilt-lifecycle-viewmodel-1.0.0-alpha01/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/11fd39c25d9662ba0a12dbe375bac7e7/transformed/jetified-hilt-lifecycle-viewmodel-1.0.0-alpha01/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/11fd39c25d9662ba0a12dbe375bac7e7/transformed/jetified-hilt-lifecycle-viewmodel-1.0.0-alpha01/AndroidManifest.xml" />

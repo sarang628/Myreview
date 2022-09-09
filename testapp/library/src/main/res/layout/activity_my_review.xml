@@ -24,9 +24,9 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container"
-        class="com.sarang.myreview.MyReviewFragment"
+        android:name="com.sarang.myreview.MyReviewFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
