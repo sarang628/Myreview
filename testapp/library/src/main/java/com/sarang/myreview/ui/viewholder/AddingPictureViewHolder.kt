@@ -3,9 +3,9 @@ package com.sarang.myreview.ui.viewholder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.sarang.myreview.databinding.ItemAddPictureBinding
+import com.sarang.myreview.databinding.ItemAddPicture1Binding
 
-class AddingPictureViewHolder(var itemAddPictureBinding: ItemAddPictureBinding) : RecyclerView.ViewHolder(
+class AddingPictureViewHolder(var itemAddPictureBinding: ItemAddPicture1Binding) : RecyclerView.ViewHolder(
     itemAddPictureBinding.root
 ) {
     fun setPicture(picture: String) {
@@ -15,7 +15,7 @@ class AddingPictureViewHolder(var itemAddPictureBinding: ItemAddPictureBinding) 
     companion object {
         fun create(parent: ViewGroup): AddingPictureViewHolder {
             val inflator = LayoutInflater.from(parent.context)
-            val binding = ItemAddPictureBinding.inflate(inflator, parent, false)
+            val binding = ItemAddPicture1Binding.inflate(inflator, parent, false)
             return AddingPictureViewHolder(binding)
         }
     }

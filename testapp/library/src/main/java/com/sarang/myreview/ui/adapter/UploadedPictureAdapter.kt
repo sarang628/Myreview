@@ -1,6 +1,7 @@
 package com.sarang.myreview.ui.adapter
 
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sarang.myreview.ui.viewholder.AddedPictureViewHolder
 import com.sryang.torang_core.data.entity.ReviewImage
@@ -26,6 +27,20 @@ class UploadedPictureAdapter : RecyclerView.Adapter<AddedPictureViewHolder>() {
         if (imagePathes != null) {
             pictures = imagePathes
             notifyDataSetChanged()
+        }
+    }
+}
+
+object UploadedBindingAdapter {
+    @JvmStatic
+    @BindingAdapter("android:uploadedPicturedata")
+    fun setAddpter(
+        recyclerView: RecyclerView, data: ArrayList<ReviewImage>?
+    ) {
+        recyclerView.adapter?.let { adapter ->
+            data?.let {
+                (adapter as UploadedPictureAdapter).setPictures(it)
+            }
         }
     }
 }

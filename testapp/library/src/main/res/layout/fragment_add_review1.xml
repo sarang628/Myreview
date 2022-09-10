@@ -33,8 +33,9 @@
             android:id="@+id/rv_my_reivew"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:adapter="@{useCase.uploadAdapter}"
+            android:adapter="@{useCase.uploadedAdapterUseCase.uploadAdapter}"
             android:orientation="horizontal"
+            android:uploadedPicturedata="@{useCase.uploadedAdapterUseCase.images}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,8 +55,9 @@
             android:id="@+id/rv_uploaded_pictures"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:adapter="@{useCase.adapter}"
+            android:adapter="@{useCase.pictureAdapterUseCase.adapter}"
             android:orientation="horizontal"
+            android:uploadingPicturedata="@{useCase.pictureAdapterUseCase.images}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -75,8 +77,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@null"
-                android:text="addImage"
                 android:onClick="@{useCase.clickAddImage}"
+                android:text="addImage"
                 android:textColor="@color/colorPrimaryLight" />
         </RelativeLayout>
 

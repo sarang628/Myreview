@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.sarang628:InstagramGallery:c5a0381c9e@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5f4f856d05e94b304e4192b1e57bf46c/transformed/jetified-InstagramGallery-c5a0381c9e/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5f4f856d05e94b304e4192b1e57bf46c/transformed/jetified-InstagramGallery-c5a0381c9e/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5f4f856d05e94b304e4192b1e57bf46c/transformed/jetified-InstagramGallery-c5a0381c9e/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9bee4131d09ca95e9aa0adb410556e92/transformed/jetified-InstagramGallery-c5a0381c9e/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9bee4131d09ca95e9aa0adb410556e92/transformed/jetified-InstagramGallery-c5a0381c9e/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9bee4131d09ca95e9aa0adb410556e92/transformed/jetified-InstagramGallery-c5a0381c9e/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

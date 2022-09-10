@@ -15,7 +15,10 @@ import com.sarang.myreview.databinding.FragmentAddReview1Binding
 import com.sarang.myreview.ui.adapter.AddPictureAdapter
 import com.sarang.myreview.ui.adapter.UploadedPictureAdapter
 import com.sarang.myreview.ui.usecase.AddReviewFragmentLayoutUseCase
+import com.sarang.myreview.ui.usecase.PictureAdapterUseCase
+import com.sarang.myreview.ui.usecase.UploadedAdapterUseCase
 import com.sarang.myreview.ui.viewmodel.MyReviewViewModel
+import com.sryang.torang_core.data.entity.ReviewImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -49,9 +52,25 @@ class MyReviewFragment : Fragment() {
                 rating = MutableStateFlow(3f),
                 contents = MutableStateFlow(""),
                 clickSendListenr = { send() },
-                uploadAdapter = UploadedPictureAdapter(),
-                adapter = AddPictureAdapter(),
-                clickAddImage = { getContent.launch("a") }
+                uploadedAdapterUseCase = UploadedAdapterUseCase(
+                    uploadAdapter = UploadedPictureAdapter(),
+                    images = ArrayList<ReviewImage>().apply {
+                        add(ReviewImage(0, 0))
+                        add(ReviewImage(0, 0))
+                        add(ReviewImage(0, 0))
+                    }
+                ),
+                clickAddImage = { getContent.launch("a") },
+                pictureAdapterUseCase = PictureAdapterUseCase(
+                    adapter = AddPictureAdapter(),
+                    images = ArrayList<String>().apply {
+                        add("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg/500px-Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg")
+                        add("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg/500px-Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg")
+                        add("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg/500px-Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg")
+                        add("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg/500px-Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg")
+                    }
+                )
+
             )
         )
     }
