@@ -6,7 +6,7 @@
             type="String" />
         <variable
             name="viewmodel"
-            type="com.sarang.myreview.MyReviewViewModel" />
+            type="com.sarang.myreview.ui.viewmodel.MyReviewViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"

@@ -1,11 +1,11 @@
-package com.sarang.myreview
+package com.sarang.myreview.ui.viewholder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sarang.myreview.databinding.ItemAddPictureBinding
 
-class AddPicHolder(var itemAddPictureBinding: ItemAddPictureBinding) : RecyclerView.ViewHolder(
+class AddingPictureViewHolder(var itemAddPictureBinding: ItemAddPictureBinding) : RecyclerView.ViewHolder(
     itemAddPictureBinding.root
 ) {
     fun setPicture(picture: String) {
@@ -13,10 +13,10 @@ class AddPicHolder(var itemAddPictureBinding: ItemAddPictureBinding) : RecyclerV
     }
 
     companion object {
-        fun create(parent: ViewGroup): AddPicHolder {
+        fun create(parent: ViewGroup): AddingPictureViewHolder {
             val inflator = LayoutInflater.from(parent.context)
             val binding = ItemAddPictureBinding.inflate(inflator, parent, false)
-            return AddPicHolder(binding)
+            return AddingPictureViewHolder(binding)
         }
     }
 }

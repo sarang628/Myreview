@@ -1,4 +1,4 @@
-package com.sarang.myreview;
+package com.sarang.myreview.util;
 
 import android.app.Activity;
 import android.content.ClipData;

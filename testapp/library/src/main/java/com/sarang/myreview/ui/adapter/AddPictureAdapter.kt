@@ -1,21 +1,22 @@
-package com.sarang.myreview
+package com.sarang.myreview.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.sarang.myreview.ui.viewholder.AddingPictureViewHolder
 import com.sryang.torang_core.util.Logger.d
 import java.util.*
 
-class AddPicRvadt constructor() :
-    RecyclerView.Adapter<AddPicHolder>() {
+class AddPictureAdapter constructor() :
+    RecyclerView.Adapter<AddingPictureViewHolder>() {
     var imagePathes = ArrayList<String>()
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): AddPicHolder {
-        return AddPicHolder.create(parent)
+    ): AddingPictureViewHolder {
+        return AddingPictureViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: AddPicHolder, position: Int) {
+    override fun onBindViewHolder(holder: AddingPictureViewHolder, position: Int) {
         holder.itemAddPictureBinding.picture = imagePathes[position]
     }
 

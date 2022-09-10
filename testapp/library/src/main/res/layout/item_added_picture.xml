@@ -10,7 +10,7 @@
 
         <variable
             name="viewmodel"
-            type="com.sarang.myreview.MyReviewViewModel" />
+            type="com.sarang.myreview.ui.viewmodel.MyReviewViewModel" />
 
         <import type="android.view.View" />
     </data>

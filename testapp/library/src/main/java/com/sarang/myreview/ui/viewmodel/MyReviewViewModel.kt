@@ -1,4 +1,4 @@
-package com.sarang.myreview
+package com.sarang.myreview.ui.viewmodel
 
 import androidx.lifecycle.*
 import com.sarang.myreview.ui.uistate.MyReviewUiState
@@ -142,7 +142,7 @@ class MyReviewViewModel @Inject constructor(private val repository: MyReviewRepo
             _uiState.update {
                 it.copy(
                     restaurantId = restaurantId,
-                    restaurantName = repository.getRestaurant(restaurantId).restaurant_name
+                    restaurantName = repository.getRestaurant(restaurantId)?.restaurant_name ?: ""
                 )
             }
         }

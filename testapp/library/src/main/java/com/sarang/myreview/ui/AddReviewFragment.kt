@@ -12,7 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.sarang.instagralleryModule.InstagramGalleryContract
 import com.sarang.myreview.databinding.FragmentAddReview1Binding
+import com.sarang.myreview.ui.adapter.AddPictureAdapter
+import com.sarang.myreview.ui.adapter.UploadedPictureAdapter
 import com.sarang.myreview.ui.usecase.AddReviewFragmentLayoutUseCase
+import com.sarang.myreview.ui.viewmodel.MyReviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -20,9 +23,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
- * [UploadedPicRvadt]
- * [AddPicHolder]
- * [UploadedPicRvadt]
+ * [UploadedPictureAdapter]
+ * [AddingPictureViewHolder]
+ * [UploadedPictureAdapter]
  * [FragmentAddReview1Binding]
  * [MyReviewViewModel]
  */
@@ -46,8 +49,8 @@ class MyReviewFragment : Fragment() {
                 rating = MutableStateFlow(3f),
                 contents = MutableStateFlow(""),
                 clickSendListenr = { send() },
-                uploadAdapter = UploadedPicRvadt(),
-                adapter = AddPicRvadt(),
+                uploadAdapter = UploadedPictureAdapter(),
+                adapter = AddPictureAdapter(),
                 clickAddImage = { getContent.launch("a") }
             )
         )
