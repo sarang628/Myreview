@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="useCase"
+            type="com.sarang.myreview.ui.usecase.AddReviewFragmentLayoutUseCase" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/root"
@@ -27,6 +33,7 @@
             android:id="@+id/rv_my_reivew"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:adapter="@{useCase.uploadAdapter}"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +54,7 @@
             android:id="@+id/rv_uploaded_pictures"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:adapter="@{useCase.adapter}"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,6 +76,7 @@
                 android:layout_height="50dp"
                 android:background="@null"
                 android:text="addImage"
+                android:onClick="@{useCase.clickAddImage}"
                 android:textColor="@color/colorPrimaryLight" />
         </RelativeLayout>
 
@@ -87,6 +96,7 @@
             android:id="@+id/ratingBar3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:rating="@={useCase.rating}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_location" />
 
@@ -99,6 +109,7 @@
             android:hint="문구입력"
             android:minHeight="50dp"
             android:paddingLeft="16dp"
+            android:text="@={useCase.contents}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ratingBar3" />
@@ -117,6 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:onClick="@{useCase.clickSendListenr}"
                 android:textColor="@color/colorPrimaryLight" />
 
         </RelativeLayout>

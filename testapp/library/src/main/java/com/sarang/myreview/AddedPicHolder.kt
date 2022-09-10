@@ -14,11 +14,9 @@ class AddedPicHolder(var itemAddPictureBinding: ItemAddedPictureBinding) : Recyc
     }
 
     companion object {
-        fun create(parent: ViewGroup, myreviewViewModel: MyReviewViewModel): AddedPicHolder {
+        fun create(parent: ViewGroup): AddedPicHolder {
             val inflator = LayoutInflater.from(parent.context)
-            val binding = ItemAddedPictureBinding.inflate(inflator, parent, false).apply {
-                viewmodel = myreviewViewModel
-            }
+            val binding = ItemAddedPictureBinding.inflate(inflator, parent, false)
 
             return AddedPicHolder(binding)
         }

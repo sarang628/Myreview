@@ -5,10 +5,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sryang.torang_core.data.entity.ReviewImage
 import java.util.*
 
-class UploadedPicRvadt(private val viewmodel: MyReviewViewModel) : RecyclerView.Adapter<AddedPicHolder>() {
+class UploadedPicRvadt : RecyclerView.Adapter<AddedPicHolder>() {
     private var pictures: List<ReviewImage> = ArrayList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddedPicHolder {
-        return AddedPicHolder.create(parent, viewmodel)
+        return AddedPicHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: AddedPicHolder, position: Int) {

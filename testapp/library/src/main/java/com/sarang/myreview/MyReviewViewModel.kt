@@ -2,8 +2,6 @@ package com.sarang.myreview
 
 import androidx.lifecycle.*
 import com.sryang.torang_core.data.entity.*
-import com.sarang.myreview.databinding.FragmentAddReviewBinding
-import com.sryang.torang_core.data.entity.*
 import com.sryang.torang_core.util.Event
 import com.sryang.torang_repository.data.entity.FeedEntity
 import com.sryang.torang_repository.data.entity.RestaurantEntity

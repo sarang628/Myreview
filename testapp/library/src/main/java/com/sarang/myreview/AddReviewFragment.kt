@@ -6,16 +6,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.sarang.instagralleryModule.InstagramGalleryContract
 import com.sarang.myreview.databinding.FragmentAddReview1Binding
-import com.sarang.myreview.databinding.FragmentAddReviewBinding
+import com.sarang.myreview.ui.usecase.AddReviewFragmentLayoutUseCase
 import com.sryang.torang_core.util.EventObserver
 import com.sryang.torang_core.util.Logger
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -33,6 +39,24 @@ class MyReviewFragment : Fragment() {
     /* 내리뷰 뷰모델 */
     private val mViewModel: MyReviewViewModel by viewModels()
 
+    val getContent = registerForActivityResult(InstagramGalleryContract()) {
+        it?.getStringArrayListExtra("pictures")?.also {
+            Logger.d(it.toString())
+            mViewModel.setSelectedImagePath(it)
+        }
+    }
+
+    private val layoutUsecase = MutableStateFlow<AddReviewFragmentLayoutUseCase>(
+        AddReviewFragmentLayoutUseCase(
+            rating = MutableStateFlow<Float>(3f),
+            contents = MutableStateFlow<String>(""),
+            clickSendListenr = { send() },
+            uploadAdapter = UploadedPicRvadt(),
+            adapter = AddPicRvadt(),
+            clickAddImage = { getContent.launch("a") }
+        )
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -40,40 +64,15 @@ class MyReviewFragment : Fragment() {
         val binding = FragmentAddReview1Binding.inflate(inflater, container, false)
             .apply {
                 lifecycleOwner = viewLifecycleOwner
-                // 업로드된 이미지 불러오는 아답터 설정
-                rvUploadedPictures.adapter = UploadedPicRvadt(mViewModel)
-
-                // 업로드 할 이미지 불러오는 아답터 설정
-                rvMyReivew.adapter = AddPicRvadt(mViewModel)
-
-                // 사진 업로드 모듈 contract 초기화
-                val getContent = registerForActivityResult(InstagramGalleryContract()) {
-                    it?.getStringArrayListExtra("pictures")?.also {
-                        Logger.d(it.toString())
-                        mViewModel.setSelectedImagePath(it)
-                    }
-                }
-
-                // 사진 업로드 모듈 호출
-                button2.setOnClickListener {
-                    getContent.launch("a")
+                viewLifecycleOwner.lifecycleScope.launch {
+                    layoutUsecase.collect(FlowCollector {
+                        useCase = it
+                    })
                 }
             }
-
-
-        // 리뷰 불러오기
-        getReviewId()?.let {
-            mViewModel.loadReview(it)
-        }
-
-        // 식당 불러오기
-        getRestaurantId()?.let {
-            mViewModel.selectRestaurant(it)
-        }
-
-        // UI 구독
-        subscribeUi(binding)
-
+        getReviewId()?.let { mViewModel.loadReview(it) } // 리뷰 불러오기
+        getRestaurantId()?.let { mViewModel.selectRestaurant(it) } // 식당 불러오기
+        subscribeUi(binding) // UI 구독
         return binding.root
     }
 
@@ -92,16 +91,14 @@ class MyReviewFragment : Fragment() {
          })*/
 
         mViewModel.selectedImagePath.observe(viewLifecycleOwner, {
-            (binding.rvMyReivew.adapter as AddPicRvadt).setImages(it)
+            //(binding.rvMyReivew.adapter as AddPicRvadt).setImages(it)
         })
         mViewModel.uploadedPictures.observe(viewLifecycleOwner, {
-            (binding.rvUploadedPictures.adapter as UploadedPicRvadt).setPictures(
-                it
-            )
+            //(binding.rvUploadedPictures.adapter as UploadedPicRvadt).setPictures(it)
         })
 
         mViewModel.deleteuploadedPictures.observe(viewLifecycleOwner, {
-            (binding.rvUploadedPictures.adapter as UploadedPicRvadt).notifyDataSetChanged()
+            //(binding.rvUploadedPictures.adapter as UploadedPicRvadt).notifyDataSetChanged()
         })
 
         mViewModel.isUploaded.observe(viewLifecycleOwner, Observer {
@@ -150,6 +147,16 @@ class MyReviewFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     }
+}
+
+private fun send() {
+    Snackbar.make(
+        view!!,
+        "clickSend \n" +
+                "rating = ${layoutUsecase.value.rating.value} " +
+                "contents = ${layoutUsecase.value.contents.value}\n",
+        Toast.LENGTH_SHORT
+    ).show()
 }
 
 interface FindRestaurantNavigation {
