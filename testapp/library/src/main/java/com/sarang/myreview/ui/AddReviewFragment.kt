@@ -57,20 +57,11 @@ class MyReviewFragment : Fragment() {
                 clickAddImage = { getContent.launch("a") },
                 uploadedAdapterUseCase = UploadedAdapterUseCase(
                     uploadAdapter = UploadedPictureAdapter(),
-                    images = ArrayList<ReviewImage>().apply {
-                        add(ReviewImage(0, 0))
-                        add(ReviewImage(0, 0))
-                        add(ReviewImage(0, 0))
-                    }
+                    images = ArrayList<ReviewImage>()
                 ),
                 pictureAdapterUseCase = PictureAdapterUseCase(
                     adapter = AddPictureAdapter(),
-                    images = ArrayList<String>().apply {
-                        add("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg/500px-Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg")
-                        add("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg/500px-Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg")
-                        add("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg/500px-Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg")
-                        add("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg/500px-Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg")
-                    }
+                    images = ArrayList<String>()
                 )
             )
         )
