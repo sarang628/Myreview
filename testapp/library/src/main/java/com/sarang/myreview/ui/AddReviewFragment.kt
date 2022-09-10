@@ -95,10 +95,13 @@ class MyReviewFragment : Fragment() {
         useCase: MutableStateFlow<AddReviewFragmentLayoutUseCase>
     ) {
         viewLifecycleOwner.lifecycleScope.launch {
-            uiState.collect {
+            uiState.collect { myReivewUiState ->
                 useCase.update {
-                    it.copy() //update layoutUsecase
+                    it.copy(
+                        pictureAdapterUseCase = it.pictureAdapterUseCase.copy(images = myReivewUiState.selectedImagePath)
+                    )
                 }
+                //update layoutUsecase
             }
         }
     }

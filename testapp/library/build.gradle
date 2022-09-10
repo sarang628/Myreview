@@ -42,13 +42,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.github.sarang628:TorangRepository:5aed244008'
-    implementation 'com.github.sarang628:TorangCore:080136d125'
-    implementation 'com.github.sarang628:TorangImageLoader:f4a2359698'
-    implementation 'com.github.sarang628:InstagramGallery:c5a0381c9e'
-
-//    implementation project(path: ':screen_selectpicture')
-//    implementation project(path: ':InstagramGalleryModule')
+    implementation "com.github.sarang628:TorangRepository:$TorangRepositoryVersion"
+    implementation "com.github.sarang628:TorangCore:$coreVersion"
+    implementation "com.github.sarang628:InstagramGallery:$instagramGalleryVerSion"
+    implementation "com.github.sarang628:TorangImageLoader:$torangImageLoaderVersion"
 
     /** common */
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"

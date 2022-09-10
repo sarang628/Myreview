@@ -42,10 +42,10 @@ dependencies {
 
     implementation project(path: ':library')
 
-    implementation 'com.github.sarang628:TorangRepository:5aed244008'
-    implementation 'com.github.sarang628:TorangCore:080136d125'
-    implementation 'com.github.sarang628:InstagramGallery:c5a0381c9e'
-    implementation 'com.github.sarang628:TorangImageLoader:f4a2359698'
+    implementation "com.github.sarang628:TorangRepository:$TorangRepositoryVersion"
+    implementation "com.github.sarang628:TorangCore:$coreVersion"
+    implementation "com.github.sarang628:InstagramGallery:$instagramGalleryVerSion"
+    implementation "com.github.sarang628:TorangImageLoader:$torangImageLoaderVersion"
 
     /** HILT */
     implementation "com.google.dagger:hilt-android:$hiltVersion"

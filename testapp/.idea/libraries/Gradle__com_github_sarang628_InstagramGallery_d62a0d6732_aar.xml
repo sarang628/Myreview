@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.sarang628:InstagramGallery:d62a0d6732@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/15e84c54ab63c97a6e6b6889fc653cef/transformed/jetified-InstagramGallery-d62a0d6732/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/15e84c54ab63c97a6e6b6889fc653cef/transformed/jetified-InstagramGallery-d62a0d6732/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/15e84c54ab63c97a6e6b6889fc653cef/transformed/jetified-InstagramGallery-d62a0d6732/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.sarang628/InstagramGallery/d62a0d6732/47b0740e61352bd9b7f78d95aef4372885a8030d/InstagramGallery-d62a0d6732-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
