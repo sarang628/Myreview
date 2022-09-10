@@ -1,12 +1,13 @@
 package com.sarang.myreview
 
 import androidx.lifecycle.*
+import com.sarang.myreview.ui.uistate.MyReviewUiState
 import com.sryang.torang_core.data.entity.*
-import com.sryang.torang_core.util.Event
-import com.sryang.torang_repository.data.entity.FeedEntity
-import com.sryang.torang_repository.data.entity.RestaurantEntity
 import com.sryang.torang_repository.repository.MyReviewRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,76 +18,54 @@ import javax.inject.Inject
 @HiltViewModel
 class MyReviewViewModel @Inject constructor(private val repository: MyReviewRepository) :
     ViewModel() {
-    var restaurantId: Int = 0
 
-    var reviewId = MutableLiveData<Int>(-1)
-    var _reviewId: LiveData<Int> = reviewId
+    private val _uiState = MutableStateFlow(
+        MyReviewUiState(
+            reviewId = 0,
+            restaurantId = 0,
+            restaurantName = "",
+            rating = 0f,
+            isUploading = false,
+            errorMsg = "",
+            selectedImagePath = ArrayList(),
+            uploadedPictures = ArrayList(),
+            deleteuploadedPictures = ArrayList()
+        )
+    )
 
-
-    /** 리뷰가 업로드 중인지 상태 */
-    private val _isUploaded = MutableLiveData<Boolean>().apply { value = false }
-    val isUploaded: LiveData<Boolean> = _isUploaded
-
-    private val _isUploading = MutableLiveData<Boolean>().apply { value = false }
-    val isUploading: LiveData<Boolean> = _isUploading
-
-    private val _clickSelectLocation = MutableLiveData<Event<Boolean>>()
-    val clickSelectLocation: LiveData<Event<Boolean>> = _clickSelectLocation
-
-    private val _errorMsg = MutableLiveData<Event<String>>()
-    val errorMsg: LiveData<Event<String>> = _errorMsg
-
-    fun clickSelectLocation() {
-        _clickSelectLocation.postValue(Event(true))
-    }
-
-    /** 리뷰 내용 two-way binding */
-    val contents = MutableLiveData<String>("")
-
-    /** 평점 two-way binding */
-    val rating = MutableLiveData<Float>()
-
-    /** 업로드 할 식당 정보 */
-    private val _selectedRestaurant = MutableLiveData<RestaurantEntity>()
-    val selectedRestaurant: LiveData<RestaurantEntity> = _selectedRestaurant
-
-    /** 업로드 된 리뷰를 불러올 때 사용 */
-    @SuppressWarnings("todo delete")
-    var myReview: LiveData<FeedEntity?> = reviewId.switchMap {
-        repository.getMyReview(it)
-    }
-
-    /** 업로드 할 선택한 사진 리스트 */
-    val selectedImagePath = MutableLiveData<ArrayList<String>>().apply {
-        value = ArrayList()
-    }
-
-    /** 리뷰를 불러왔을 때 업로드 되었던 사진 리스트 */
-    var uploadedPictures: MutableLiveData<ArrayList<ReviewImage>> = MutableLiveData()
-
-    /** 리뷰를 불러왔을 때 업로드 되었던 사진 리스트 */
-    var deleteuploadedPictures: MutableLiveData<ArrayList<ReviewImage>> =
-        MutableLiveData(ArrayList())
+    val uiState: StateFlow<MyReviewUiState> = _uiState
 
     /**
      * 업로드 할 이미지 설정
      */
     fun setSelectedImagePath(imagePathes: ArrayList<String>) {
-        selectedImagePath.postValue(imagePathes)
+        viewModelScope.launch {
+            _uiState.update {
+                it.copy(
+                    selectedImagePath = imagePathes
+                )
+            }
+        }
     }
 
     /**
      * 리뷰를 수정 할 경우 리뷰 불러오는 기능
      */
     fun loadReview(reviewId: Int) {
-        this.reviewId.postValue(reviewId)
+
     }
 
     /**
      * 리뷰 업로드
      */
     fun uploadReview() {
-        _isUploading.postValue(true)
+        viewModelScope.launch {
+            _uiState.update {
+                it.copy(
+                    isUploading = true
+                )
+            }
+        }
 
         viewModelScope.launch {
             /*val reviewAndImage = ReviewAndImage(
@@ -109,12 +88,21 @@ class MyReviewViewModel @Inject constructor(private val repository: MyReviewRepo
             } catch (e: Exception) {
                 _errorMsg.postValue(Event(e.message.toString()))
             }*/
-            _isUploading.postValue(false)
+
+            _uiState.update {
+                it.copy(
+                    isUploading = false
+                )
+            }
         }
     }
 
     fun modifyReview() {
-        _isUploading.postValue(true)
+        _uiState.update {
+            it.copy(
+                isUploading = true
+            )
+        }
 
         viewModelScope.launch {
             /*val reviewAndImage = ReviewAndImage(
@@ -141,19 +129,27 @@ class MyReviewViewModel @Inject constructor(private val repository: MyReviewRepo
             } catch (e: Exception) {
                 _errorMsg.postValue(Event(e.message.toString()))
             }*/
-            _isUploading.postValue(false)
+            _uiState.update {
+                it.copy(
+                    isUploading = false
+                )
+            }
         }
     }
 
     fun selectRestaurant(restaurantId: Int) {
-        this.restaurantId = restaurantId
         viewModelScope.launch {
-            _selectedRestaurant.postValue(repository.getRestaurant(restaurantId))
+            _uiState.update {
+                it.copy(
+                    restaurantId = restaurantId,
+                    restaurantName = repository.getRestaurant(restaurantId).restaurant_name
+                )
+            }
         }
     }
 
     fun deleteUploadedPicture(reviewImage: ReviewImage) {
-        deleteuploadedPictures.value?.let {
+        /*deleteuploadedPictures.value?.let {
             if (!it.contains(reviewImage)) {
                 it.add(reviewImage)
                 deleteuploadedPictures.postValue(deleteuploadedPictures.value)
@@ -161,19 +157,19 @@ class MyReviewViewModel @Inject constructor(private val repository: MyReviewRepo
                 it.remove(reviewImage)
                 deleteuploadedPictures.postValue(deleteuploadedPictures.value)
             }
-        }
+        }*/
     }
 
     fun deleteUploadPicture(reviewImage: String) {
-        selectedImagePath.value?.remove(reviewImage)
-        selectedImagePath.postValue(selectedImagePath.value)
+        /*selectedImagePath.value?.remove(reviewImage)
+        selectedImagePath.postValue(selectedImagePath.value)*/
     }
 
     fun isDelete(reviewImage: ReviewImage): Boolean {
         var isContain = false
-        deleteuploadedPictures.value?.let {
+        /*deleteuploadedPictures.value?.let {
             isContain = it.contains(reviewImage)
-        }
+        }*/
 
         return isContain
     }

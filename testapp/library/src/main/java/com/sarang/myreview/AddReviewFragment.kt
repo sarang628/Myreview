@@ -1,26 +1,21 @@
 package com.sarang.myreview
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.snackbar.Snackbar
+import androidx.lifecycle.viewModelScope
 import com.sarang.instagralleryModule.InstagramGalleryContract
 import com.sarang.myreview.databinding.FragmentAddReview1Binding
 import com.sarang.myreview.ui.usecase.AddReviewFragmentLayoutUseCase
-import com.sryang.torang_core.util.EventObserver
-import com.sryang.torang_core.util.Logger
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,7 +23,7 @@ import javax.inject.Inject
  * [UploadedPicRvadt]
  * [AddPicHolder]
  * [UploadedPicRvadt]
- * [FragmentAddReviewBinding]
+ * [FragmentAddReview1Binding]
  * [MyReviewViewModel]
  */
 @AndroidEntryPoint
@@ -39,23 +34,24 @@ class MyReviewFragment : Fragment() {
     /* 내리뷰 뷰모델 */
     private val mViewModel: MyReviewViewModel by viewModels()
 
-    val getContent = registerForActivityResult(InstagramGalleryContract()) {
-        it?.getStringArrayListExtra("pictures")?.also {
-            Logger.d(it.toString())
+    private val getContent = registerForActivityResult(InstagramGalleryContract()) { intent ->
+        intent?.getStringArrayListExtra("pictures")?.let {
             mViewModel.setSelectedImagePath(it)
         }
     }
 
-    private val layoutUsecase = MutableStateFlow<AddReviewFragmentLayoutUseCase>(
-        AddReviewFragmentLayoutUseCase(
-            rating = MutableStateFlow<Float>(3f),
-            contents = MutableStateFlow<String>(""),
-            clickSendListenr = { send() },
-            uploadAdapter = UploadedPicRvadt(),
-            adapter = AddPicRvadt(),
-            clickAddImage = { getContent.launch("a") }
+    private val layoutUsecase by lazy {
+        MutableStateFlow(
+            AddReviewFragmentLayoutUseCase(
+                rating = MutableStateFlow(3f),
+                contents = MutableStateFlow(""),
+                clickSendListenr = { send() },
+                uploadAdapter = UploadedPicRvadt(),
+                adapter = AddPicRvadt(),
+                clickAddImage = { getContent.launch("a") }
+            )
         )
-    )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -64,16 +60,35 @@ class MyReviewFragment : Fragment() {
         val binding = FragmentAddReview1Binding.inflate(inflater, container, false)
             .apply {
                 lifecycleOwner = viewLifecycleOwner
-                viewLifecycleOwner.lifecycleScope.launch {
-                    layoutUsecase.collect(FlowCollector {
-                        useCase = it
-                    })
-                }
+                subScribeLayoutUseCase(layoutUsecase)
+                mViewModel.subScribeUiState(layoutUsecase)
             }
         getReviewId()?.let { mViewModel.loadReview(it) } // 리뷰 불러오기
         getRestaurantId()?.let { mViewModel.selectRestaurant(it) } // 식당 불러오기
         subscribeUi(binding) // UI 구독
         return binding.root
+    }
+
+    private fun MyReviewViewModel.subScribeUiState(
+        useCase: MutableStateFlow<AddReviewFragmentLayoutUseCase>
+    ) {
+        viewModelScope.launch {
+            uiState.collect() {
+                layoutUsecase.update {
+                    it.copy() //update layoutUsecase
+                }
+            }
+        }
+    }
+
+    private fun FragmentAddReview1Binding.subScribeLayoutUseCase(
+        useCase: MutableStateFlow<AddReviewFragmentLayoutUseCase>
+    ) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            useCase.collect {
+                this@subScribeLayoutUseCase.useCase = it
+            }
+        }
     }
 
     private fun subscribeUi(binding: FragmentAddReview1Binding) {
@@ -90,37 +105,37 @@ class MyReviewFragment : Fragment() {
              }
          })*/
 
-        mViewModel.selectedImagePath.observe(viewLifecycleOwner, {
-            //(binding.rvMyReivew.adapter as AddPicRvadt).setImages(it)
-        })
-        mViewModel.uploadedPictures.observe(viewLifecycleOwner, {
-            //(binding.rvUploadedPictures.adapter as UploadedPicRvadt).setPictures(it)
-        })
+//        mViewModel.selectedImagePath.observe(viewLifecycleOwner, {
+        //(binding.rvMyReivew.adapter as AddPicRvadt).setImages(it)
+//        })
+//        mViewModel.uploadedPictures.observe(viewLifecycleOwner, {
+        //(binding.rvUploadedPictures.adapter as UploadedPicRvadt).setPictures(it)
+//        })
 
-        mViewModel.deleteuploadedPictures.observe(viewLifecycleOwner, {
-            //(binding.rvUploadedPictures.adapter as UploadedPicRvadt).notifyDataSetChanged()
-        })
+//        mViewModel.deleteuploadedPictures.observe(viewLifecycleOwner, {
+        //(binding.rvUploadedPictures.adapter as UploadedPicRvadt).notifyDataSetChanged()
+//        })
 
-        mViewModel.isUploaded.observe(viewLifecycleOwner, Observer {
+        /*mViewModel.isUploaded.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it)
                     requireActivity().finish()
             }
-        })
+        })*/
 
-        mViewModel.clickSelectLocation.observe(viewLifecycleOwner, EventObserver {
+        /*mViewModel.clickSelectLocation.observe(viewLifecycleOwner, EventObserver {
             findRestaurantNavigation.go(requireActivity() as AppCompatActivity)
-        })
+        })*/
 
         /*mapSharedViewModel.selectedRestaurant.observe(viewLifecycleOwner) {
 
         }*/
 
-        mViewModel.errorMsg.observe(viewLifecycleOwner, EventObserver {
+        /*mViewModel.errorMsg.observe(viewLifecycleOwner, EventObserver {
             AlertDialog.Builder(requireContext())
                 .setMessage(it)
                 .show()
-        })
+        })*/
     }
 
     private fun getReviewId(): Int? {
@@ -150,13 +165,13 @@ class MyReviewFragment : Fragment() {
 }
 
 private fun send() {
-    Snackbar.make(
+    /*Snackbar.make(
         view!!,
         "clickSend \n" +
                 "rating = ${layoutUsecase.value.rating.value} " +
                 "contents = ${layoutUsecase.value.contents.value}\n",
         Toast.LENGTH_SHORT
-    ).show()
+    ).show()*/
 }
 
 interface FindRestaurantNavigation {
