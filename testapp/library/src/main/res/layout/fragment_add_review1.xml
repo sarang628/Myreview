@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-        <variable
-            name="review"
-            type="com.sryang.torang_core.data.entity.ReviewAndImage" />
-
-        <import type="android.view.View" />
-    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/root"
@@ -78,7 +71,6 @@
                 android:textColor="@color/colorPrimaryLight" />
         </RelativeLayout>
 
-        <!--android:onClick="@{()->viewModel.clickSelectLocation()}"-->
         <TextView
             android:id="@+id/tv_location"
             android:layout_width="0dp"
@@ -90,9 +82,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rl_add_image" />
-        <!--android:text="@{viewModel.selectedRestaurant.restaurant_name}"-->
 
-        <!--android:rating="@={viewModel.rating}"-->
         <RatingBar
             android:id="@+id/ratingBar3"
             android:layout_width="wrap_content"
@@ -100,7 +90,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_location" />
 
-        <!--android:text="@={viewModel.contents}"-->
         <EditText
             android:id="@+id/editText"
             android:layout_width="0dp"
@@ -123,9 +112,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <!--android:enabled="@{(viewModel.selectedImagePath.size() + viewModel.uploadedPictures.size() - viewModel.deleteuploadedPictures.size() &gt; 0 ) &amp;&amp; !viewModel.contents.empty ? true : false}"
-            android:onClick="@{()-> viewModel.reviewId != -1 ? viewModel.modifyReview() : viewModel.uploadReview()}"
-            android:text='@{viewModel.reviewId != -1 ? "Modify" : "Register"}'-->
             <Button
                 android:id="@+id/btnUpload"
                 android:layout_width="match_parent"
@@ -135,7 +121,6 @@
 
         </RelativeLayout>
 
-        <!--android:visibility="@{viewModel.isUploading() ? View.VISIBLE : View.GONE}"-->
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

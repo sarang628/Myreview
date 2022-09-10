@@ -10,10 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.sarang.instagralleryModule.InstagramGalleryContract
+import com.sarang.myreview.databinding.FragmentAddReview1Binding
+import com.sarang.myreview.databinding.FragmentAddReviewBinding
 import com.sryang.torang_core.util.EventObserver
 import com.sryang.torang_core.util.Logger
-import com.sarang.instagralleryModule.InstagramGalleryContract
-import com.sarang.myreview.databinding.FragmentAddReviewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,76 +30,66 @@ class MyReviewFragment : Fragment() {
     @Inject
     lateinit var findRestaurantNavigation: FindRestaurantNavigation
 
-    /** 공유 뷰모델 */
-    //private val mapSharedViewModel: MapSharedViewModel by activityViewModels()
-
     /* 내리뷰 뷰모델 */
     private val mViewModel: MyReviewViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        Logger.v("enter")
-        // 바인딩 초기화
-        val binding = FragmentAddReviewBinding.inflate(layoutInflater, container, false)
+        // 바인딩 초기
+        val binding = FragmentAddReview1Binding.inflate(inflater, container, false)
             .apply {
-                // 뷰모델 설정
-                //viewModel = mViewModel
-                // 공유 뷰모델 설정
-                //mapSharedViewModel = mapSharedViewModel
-                // lifecyclerowner 설정
-//                lifecycleOwner = viewLifecycleOwner
-
+                lifecycleOwner = viewLifecycleOwner
                 // 업로드된 이미지 불러오는 아답터 설정
-//                rvUploadedPictures.adapter = UploadedPicRvadt(mViewModel)
+                rvUploadedPictures.adapter = UploadedPicRvadt(mViewModel)
 
                 // 업로드 할 이미지 불러오는 아답터 설정
-//                rvMyReivew.adapter = AddPicRvadt(mViewModel)
+                rvMyReivew.adapter = AddPicRvadt(mViewModel)
 
                 // 사진 업로드 모듈 contract 초기화
-//                val getContent = registerForActivityResult(InstagramGalleryContract()) {
-//                    it?.getStringArrayListExtra("pictures")?.also {
-//                        Logger.d(it.toString())
-//                        mViewModel.setSelectedImagePath(it)
-//                    }
-//                }
+                val getContent = registerForActivityResult(InstagramGalleryContract()) {
+                    it?.getStringArrayListExtra("pictures")?.also {
+                        Logger.d(it.toString())
+                        mViewModel.setSelectedImagePath(it)
+                    }
+                }
 
                 // 사진 업로드 모듈 호출
-//                button2.setOnClickListener {
-//                    getContent.launch("a")
-//                }
+                button2.setOnClickListener {
+                    getContent.launch("a")
+                }
             }
 
 
         // 리뷰 불러오기
-//        getReviewId()?.let {
-//            mViewModel.loadReview(it)
-//        }
+        getReviewId()?.let {
+            mViewModel.loadReview(it)
+        }
 
         // 식당 불러오기
-//        getRestaurantId()?.let {
-//            mViewModel.selectRestaurant(it)
-//        }
+        getRestaurantId()?.let {
+            mViewModel.selectRestaurant(it)
+        }
 
         // UI 구독
-//        subscribeUi(binding)
+        subscribeUi(binding)
 
         return binding.root
     }
 
-    private fun subscribeUi(binding: FragmentAddReviewBinding) {
-        /*mViewModel.myReview?.observe(viewLifecycleOwner, {
-            it?.let {
-                binding.review = it
-                it.review?.let {
-                    binding.editText.setText(it.contents)
-                }
-                it.review?.rating?.let {
-                    binding.ratingBar3.rating = it
-                }
-                mViewModel.uploadedPictures.postValue(ArrayList(it.images))
-            }
-        })*/
+    private fun subscribeUi(binding: FragmentAddReview1Binding) {
+        /* mViewModel.myReview?.observe(viewLifecycleOwner, {
+             it?.let {
+                 binding.review = it
+                 it.review?.let {
+                     binding.editText.setText(it.contents)
+                 }
+                 it.review?.rating?.let {
+                     binding.ratingBar3.rating = it
+                 }
+                 mViewModel.uploadedPictures.postValue(ArrayList(it.images))
+             }
+         })*/
 
         mViewModel.selectedImagePath.observe(viewLifecycleOwner, {
             (binding.rvMyReivew.adapter as AddPicRvadt).setImages(it)

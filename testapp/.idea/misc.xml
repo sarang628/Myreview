@@ -5,6 +5,7 @@
       <map>
         <entry key="library/src/main/res/layout/activity_my_review.xml" value="0.12222222222222222" />
         <entry key="library/src/main/res/layout/fragment_add_review.xml" value="0.1" />
+        <entry key="library/src/main/res/layout/fragment_add_review1.xml" value="0.3458333333333333" />
         <entry key="library/src/main/res/layout/item_added_picture.xml" value="0.1" />
       </map>
     </option>
