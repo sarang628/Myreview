@@ -13,7 +13,9 @@ data class AddReviewFragmentLayoutUseCase(
     val clickSendListenr: View.OnClickListener,
     val clickAddImage: View.OnClickListener,
     val pictureAdapterUseCase: PictureAdapterUseCase,
-    val uploadedAdapterUseCase: UploadedAdapterUseCase
+    val uploadedAdapterUseCase: UploadedAdapterUseCase,
+    val restaurantName: String,
+    val isUploading: Boolean
 )
 
 data class PictureAdapterUseCase(

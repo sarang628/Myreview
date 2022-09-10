@@ -69,8 +69,9 @@ class MyReviewFragment : Fragment() {
                         add("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg/500px-Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg")
                         add("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg/500px-Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg")
                     }
-                )
-
+                ),
+                restaurantName = "abcd",
+                isUploading = false
             )
         )
     }
@@ -87,7 +88,6 @@ class MyReviewFragment : Fragment() {
             }
         getReviewId()?.let { mViewModel.loadReview(it) } // 리뷰 불러오기
         getRestaurantId()?.let { mViewModel.selectRestaurant(it) } // 식당 불러오기
-        subscribeUi(binding) // UI 구독
         return binding.root
     }
 
@@ -111,53 +111,6 @@ class MyReviewFragment : Fragment() {
                 this@subScribeLayoutUseCase.useCase = it
             }
         }
-    }
-
-    private fun subscribeUi(binding: FragmentAddReview1Binding) {
-        /* mViewModel.myReview?.observe(viewLifecycleOwner, {
-             it?.let {
-                 binding.review = it
-                 it.review?.let {
-                     binding.editText.setText(it.contents)
-                 }
-                 it.review?.rating?.let {
-                     binding.ratingBar3.rating = it
-                 }
-                 mViewModel.uploadedPictures.postValue(ArrayList(it.images))
-             }
-         })*/
-
-//        mViewModel.selectedImagePath.observe(viewLifecycleOwner, {
-        //(binding.rvMyReivew.adapter as AddPicRvadt).setImages(it)
-//        })
-//        mViewModel.uploadedPictures.observe(viewLifecycleOwner, {
-        //(binding.rvUploadedPictures.adapter as UploadedPicRvadt).setPictures(it)
-//        })
-
-//        mViewModel.deleteuploadedPictures.observe(viewLifecycleOwner, {
-        //(binding.rvUploadedPictures.adapter as UploadedPicRvadt).notifyDataSetChanged()
-//        })
-
-        /*mViewModel.isUploaded.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                if (it)
-                    requireActivity().finish()
-            }
-        })*/
-
-        /*mViewModel.clickSelectLocation.observe(viewLifecycleOwner, EventObserver {
-            findRestaurantNavigation.go(requireActivity() as AppCompatActivity)
-        })*/
-
-        /*mapSharedViewModel.selectedRestaurant.observe(viewLifecycleOwner) {
-
-        }*/
-
-        /*mViewModel.errorMsg.observe(viewLifecycleOwner, EventObserver {
-            AlertDialog.Builder(requireContext())
-                .setMessage(it)
-                .show()
-        })*/
     }
 
     private fun getReviewId(): Int? {
@@ -187,13 +140,6 @@ class MyReviewFragment : Fragment() {
 }
 
 private fun send() {
-    /*Snackbar.make(
-        view!!,
-        "clickSend \n" +
-                "rating = ${layoutUsecase.value.rating.value} " +
-                "contents = ${layoutUsecase.value.contents.value}\n",
-        Toast.LENGTH_SHORT
-    ).show()*/
 }
 
 interface FindRestaurantNavigation {

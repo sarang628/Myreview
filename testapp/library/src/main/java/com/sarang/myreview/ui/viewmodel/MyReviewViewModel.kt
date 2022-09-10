@@ -23,7 +23,7 @@ class MyReviewViewModel @Inject constructor(private val repository: MyReviewRepo
         MyReviewUiState(
             reviewId = 0,
             restaurantId = 0,
-            restaurantName = "",
+            restaurantName = "abc",
             rating = 0f,
             isUploading = false,
             errorMsg = "",

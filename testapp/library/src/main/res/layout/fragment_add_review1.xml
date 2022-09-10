@@ -8,6 +8,8 @@
         <variable
             name="useCase"
             type="com.sarang.myreview.ui.usecase.AddReviewFragmentLayoutUseCase" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -89,6 +91,7 @@
             android:gravity="center_vertical"
             android:hint="위치 추가"
             android:paddingLeft="16dp"
+            android:text="@{useCase.restaurantName}"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -138,6 +141,7 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="@{useCase.uploading ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
