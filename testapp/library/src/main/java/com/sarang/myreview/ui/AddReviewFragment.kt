@@ -49,9 +49,12 @@ class MyReviewFragment : Fragment() {
     private val layoutUsecase by lazy {
         MutableStateFlow(
             AddReviewFragmentLayoutUseCase(
+                restaurantName = "abcd",
+                isUploading = false,
                 rating = MutableStateFlow(3f),
                 contents = MutableStateFlow(""),
                 clickSendListenr = { send() },
+                clickAddImage = { getContent.launch("a") },
                 uploadedAdapterUseCase = UploadedAdapterUseCase(
                     uploadAdapter = UploadedPictureAdapter(),
                     images = ArrayList<ReviewImage>().apply {
@@ -60,7 +63,6 @@ class MyReviewFragment : Fragment() {
                         add(ReviewImage(0, 0))
                     }
                 ),
-                clickAddImage = { getContent.launch("a") },
                 pictureAdapterUseCase = PictureAdapterUseCase(
                     adapter = AddPictureAdapter(),
                     images = ArrayList<String>().apply {
@@ -69,9 +71,7 @@ class MyReviewFragment : Fragment() {
                         add("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg/500px-Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg")
                         add("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg/500px-Jennie_Kim_from_BLACKPINK_PUBG_210321_%28cropped%29.jpg")
                     }
-                ),
-                restaurantName = "abcd",
-                isUploading = false
+                )
             )
         )
     }
@@ -94,9 +94,9 @@ class MyReviewFragment : Fragment() {
     private fun MyReviewViewModel.subScribeUiState(
         useCase: MutableStateFlow<AddReviewFragmentLayoutUseCase>
     ) {
-        viewModelScope.launch {
-            uiState.collect() {
-                layoutUsecase.update {
+        viewLifecycleOwner.lifecycleScope.launch {
+            uiState.collect {
+                useCase.update {
                     it.copy() //update layoutUsecase
                 }
             }
