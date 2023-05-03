@@ -12,5 +12,6 @@ class MyReviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val activityMyReviewBinding = ActivityMyReviewBinding.inflate(layoutInflater)
+        setContentView(activityMyReviewBinding.root)
     }
 }
