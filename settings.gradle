@@ -1,0 +1,3 @@
+rootProject.name = "MyReview"
+include ':app'
+include ':library'
