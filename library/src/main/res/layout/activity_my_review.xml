@@ -6,32 +6,4 @@
     android:layout_height="match_parent"
     tools:context=".MyReviewActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/toolbar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorSecondaryLight"
-        app:elevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tb_my_review"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="새 개시물" />
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/container"
-        android:name="com.sarang.myreview.ui.MyReviewFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

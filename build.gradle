@@ -48,7 +48,7 @@ ext {
 }
 
 buildscript {
-    ext.navigationVersion = '2.5.0-alpha03'
+    ext.navigationVersion = '2.4.1'
     ext.hiltVersion = '2.40.1'
     repositories {
         google()

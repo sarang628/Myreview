@@ -12,6 +12,7 @@ android {
         applicationId "com.sryang.myreview"
         minSdk rootProject.minSdk
         targetSdk rootProject.targetSdk
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -29,18 +30,20 @@ android {
         jvmTarget = '1.8'
     }
 
-    buildFeatures {
+    buildFeatures{
         dataBinding true
         viewBinding true
     }
+    namespace 'com.sryang.myreview'
 }
 
 dependencies {
-    implementation "androidx.core:core-ktx:$ktxVersion"
+    /** common */
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "com.google.android.material:material:$materialVersion"
 
     /** HILT */
-    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    implementation "com.google.dagger:hilt-android:$hiltAndroidVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltViewModelVersion"
     kapt "androidx.hilt:hilt-compiler:$hiltViewModelVersion"

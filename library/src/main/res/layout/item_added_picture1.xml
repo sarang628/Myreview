@@ -4,10 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="viewmodel"
-            type="com.sarang.myreview.ui.viewmodel.MyReviewViewModel" />
-
         <import type="android.view.View" />
     </data>
 
