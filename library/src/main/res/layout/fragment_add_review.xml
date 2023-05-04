@@ -5,11 +5,6 @@
 
     <data>
 
-        <variable
-            name="useCase"
-            type="com.sarang.myreview.ui.usecase.AddReviewFragmentLayoutUseCase" />
-
-
         <import type="android.view.View" />
     </data>
 
@@ -36,9 +31,7 @@
             android:id="@+id/rv_my_reivew"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:adapter="@{useCase.pictureAdapterUseCase.adapter}"
             android:orientation="horizontal"
-            android:uploadingPicturedata="@{useCase.pictureAdapterUseCase.images}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +50,6 @@
             android:id="@+id/rv_uploaded_pictures"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:adapter="@{useCase.uploadedAdapterUseCase.uploadAdapter}"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,11 +65,10 @@
             app:layout_constraintTop_toBottomOf="@+id/rv_uploaded_pictures">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btn_add_image"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@null"
-                android:onClick="@{useCase.clickAddImage}"
                 android:text="addImage"
                 android:textColor="@color/colorPrimaryLight" />
         </RelativeLayout>
@@ -89,22 +80,20 @@
             android:gravity="center_vertical"
             android:hint="위치 추가"
             android:paddingLeft="16dp"
-            android:text="@{useCase.restaurantName}"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rl_add_image" />
 
         <RatingBar
-            android:id="@+id/ratingBar3"
+            android:id="@+id/rb_my_reivew"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:rating="@={useCase.rating}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_location" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/et_contents"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -112,10 +101,9 @@
             android:hint="문구입력"
             android:minHeight="50dp"
             android:paddingLeft="16dp"
-            android:text="@={useCase.contents}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar3" />
+            app:layout_constraintTop_toBottomOf="@+id/rb_my_reivew" />
 
 
         <RelativeLayout
@@ -131,19 +119,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:onClick="@{useCase.clickSendListenr}"
                 android:textColor="@color/colorPrimaryLight" />
 
         </RelativeLayout>
 
         <ProgressBar
+            android:id="@+id/pb_my_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{useCase.uploading ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="invisible" />
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

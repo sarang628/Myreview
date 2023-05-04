@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.sarang.myreview.databinding.FragmentAddReview1Binding
+import com.google.android.material.snackbar.Snackbar
+import com.sarang.myreview.databinding.FragmentAddReviewBinding
 import com.sarang.myreview.ui.adapter.UploadedPictureAdapter
-import com.sarang.myreview.ui.usecase.AddReviewFragmentLayoutUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.sarang.myreview.ui.uistate.MyReviewUiState
+import com.sarang.myreview.ui.uistate.testMyReviewUiState
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 /**
@@ -24,26 +26,35 @@ import kotlinx.coroutines.launch
 //@AndroidEntryPoint
 class MyReviewFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // 바인딩 초기
-        val binding = FragmentAddReview1Binding.inflate(inflater, container, false)
-            .apply {
-                lifecycleOwner = viewLifecycleOwner
-            }
+        val binding = FragmentAddReviewBinding.inflate(inflater, container, false)
+        subScribeUiState(testMyReviewUiState(), binding)
+        initEvent(binding)
         return binding.root
     }
-    private fun FragmentAddReview1Binding.subScribeLayoutUseCase(
-        useCase: MutableStateFlow<AddReviewFragmentLayoutUseCase>
+
+    fun initEvent(binding: FragmentAddReviewBinding){
+        binding.btnUpload.setOnClickListener { Snackbar.make(binding.root,"clickUpload", Snackbar.LENGTH_SHORT).show() }
+        binding.btnAddImage.setOnClickListener { Snackbar.make(binding.root,"clickAddImage", Snackbar.LENGTH_SHORT).show() }
+    }
+
+    private fun subScribeUiState(
+        uiState: StateFlow<MyReviewUiState>,
+        binding: FragmentAddReviewBinding
     ) {
-        viewLifecycleOwner.lifecycleScope.launch {
-            useCase.collect {
-                this@subScribeLayoutUseCase.useCase = it
+        lifecycleScope.launch {
+            uiState.collect {
+                it.rating?.let { binding.rbMyReivew.rating = it }
+                binding.tvLocation.text = it.restaurantName
+                binding.etContents.setText(it.contents)
+                binding.pbMyReview.visibility = if(it.isUploading) View.VISIBLE else View.GONE
             }
         }
     }
+
 
     private fun getReviewId(): Int? {
         var reviewId: Int? = null
