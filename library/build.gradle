@@ -68,7 +68,4 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:$navigationVersion"
 
     implementation 'com.google.code.gson:gson:2.10.1'
-
-    implementation 'com.github.sarang628:TorangImageLoader:f4a2359698'
-    implementation "com.github.sarang628:Theme:$themeVersion"
 }
